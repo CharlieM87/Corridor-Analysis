@@ -1,0 +1,4 @@
+﻿------ Build started: Project: DirectionsAPIProject (SQL Server 2014), Configuration: Development ------
+Build started: SQL Server Integration Services project: Incremental ...
+Build complete -- 0 errors, 0 warnings
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========

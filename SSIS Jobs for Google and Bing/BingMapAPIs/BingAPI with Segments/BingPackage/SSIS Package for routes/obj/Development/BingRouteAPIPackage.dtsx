@@ -1,0 +1,1794 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/5/2016 4:54:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ISSUSLAP1350"
+  DTS:CreatorName="ISOFTSTONE\harisham"
+  DTS:DTSID="{11D12ED6-38FC-4581-A7D0-3FD5197BB6BB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="BingRouteAPIPackage"
+  DTS:PackageType="5"
+  DTS:VersionBuild="176"
+  DTS:VersionGUID="{F814DFEA-D153-4491-A76E-5342078DB039}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5157CE35-774D-4B96-BCA5-39C0EDE37E1D}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="GETDATE()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CreatedDate">
+      <DTS:VariableValue
+        DTS:DataType="7">8/29/2017 5:30:24 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B6FE293D-0D86-471D-A2F0-E455C1A75E62}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">exec [dbo].[sp_Call_Insert_BingAPIRoute_Results] ?,?,?,?,?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{6DD2FAB4-D7C7-437D-A7F8-A0CAAA3AF3D0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DB.WebService_Example]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[TransitMode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="TransitMode"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@TransitMode]"
+                      lineageId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[TransitMode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[URL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6000"
+                      cachedName="URL"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@URL]"
+                      lineageId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[URL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[RouteWithWaypoints]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1500"
+                      cachedName="RouteWithWaypoints"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@WayPoints]"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[RouteWithWaypoints]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[DirectionsResponseXMLString]"
+                      cachedDataType="nText"
+                      cachedName="DirectionsResponseXMLString"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@xml]"
+                      lineageId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[DirectionsResponseXMLString]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[RouteID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="RouteID"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@RouteID]"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[RouteID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@TransitMode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="@TransitMode">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@URL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6000"
+                      name="@URL">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@WayPoints]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3000"
+                      name="@WayPoints">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@xml]"
+                      dataType="nText"
+                      name="@xml">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">193</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[@RouteID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="@RouteID">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Read BING API"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;10"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="Read BING API"
+              version="9">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="30">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_2d7461202e664805b7795f017a6f1858")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_2d7461202e664805b7795f017a6f1858")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using System.Web;
+using System.Windows.Forms;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Net;
+using System.Xml;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
+using System.IO;
+
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent 
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection);
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called once for every row that passes through the component from Input0.
+    ///
+    /// Example of reading a value from a column in the the row:
+    ///  string zipCode = Row.ZipCode
+    ///
+    /// Example of writing a value to a column in the row:
+    ///  Row.ZipCode = zipCode
+    /// </summary>
+    /// <param name="Row">The row that is currently passing through the component</param>
+    public override void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+        // Create a new web client 
+        WebClient wc = new WebClient();
+
+        // Build the URL that is to be requested        
+        string uri = "http://dev.virtualearth.net/REST/v1/Routes?" + Row.RouteWithWaypoints + "&key=" + Variables.DistanceAPIKeyPP + "&distanceUnit=mi&optimize=timeWithTraffic&routeAttributes=excludeItinerary&output=xml" + "&travelmode=" + Variables.ModeOfTransportPP ;
+     /*
+       String path = @"C:\BingMapAPIs\Log\logFile2.txt";
+       StreamWriter file = new StreamWriter(path, true);
+
+          file.WriteLine("URL " + uri);
+        file.Close();
+     */     
+        // Get the XML
+        string directionsInfo = wc.DownloadString(uri);
+        XmlDocument xmlDoc = new XmlDocument();
+        XmlDocument newxmlDoc = new XmlDocument();
+        
+        /*
+        file.WriteLine("Waypoints " + Row.RouteWithWaypoints);
+        file.WriteLine("APIKey " + Variables.DistanceAPIKeyPP);
+        file.WriteLine("travelmode " + Variables.ModeOfTransportPP);
+        */
+
+        xmlDoc.LoadXml(directionsInfo);
+
+        //file.WriteLine("Before removing namespace" + xmlDoc.OuterXml.ToString());
+
+        newxmlDoc = RemoveNS(xmlDoc);
+        
+        XmlNode root = newxmlDoc.DocumentElement;
+
+        // Update the outgoing rows. 
+        Row.TransitMode = Variables.ModeOfTransportPP;
+        Row.CreatedDate = Variables.CreatedDate;
+        Row.URL = uri;
+
+        //Convert the xml string to Blob and assign       
+        // Get the string to save
+        string toConvert = root.OuterXml.ToString();
+        toConvert= CleanInvalidXmlChars(toConvert);
+
+        //toConvert = "<Response><Copyright>Copyright © 2017 Microsoft and its suppliers. All rights reserved. This API cannot be accessed and the content and any results may not be used, reproduced or transmitted in any manner without express written permission from Microsoft Corporation.</Copyright><BrandLogoUri>http://dev.virtualearth.net/Branding/logo_powered_by.png</BrandLogoUri><StatusCode>200</StatusCode><StatusDescription>OK</StatusDescription><AuthenticationResultCode>ValidCredentials</AuthenticationResultCode><TraceId>8d40a72cecfe408fab8a2aaf82812ce0|CO30323911|7.7.0.0|CO40090813, CO40080608</TraceId><ResourceSets><ResourceSet><EstimatedTotal>1</EstimatedTotal><Resources><Route><Id>v68,h7,i0,a0,cen-US,dAAAAAAAAAAA1,y0,s1,m1,o1,t7,wO99PjZfaRkAMsI9OXaVewA2~AlHxBcqRA1sBAADgAQAAgD8A0~TkUgMTE5dGggU3Q1~~~~v10,wHvruVpbaRkB4mWGjrKZewA2~AlHxBcrwBFsBAADgAehnpT4A0~TkUgMTE5dGggU3Q1~~~1~v10,wEeSghJnaRkDrAl5m2KVewA2~AlHxBcrRA1sBAADgAQIIPT8A0~TkUgMTE5dGggU3Q1~~~1~v10,wj20ZcJbaRkCBXrhzYadewA2~AlHxBcqQgloBAADgAVnyIz8A0~TkUgMTE5dGggU3Q1~~~1~v10,wVDvD1JbaRkDl7nN8tKdewA2~AlHxBcrRgloBAADgAQAAAAAA0~TkUgMTE5dGggU3Q1~~~~v10,k0</Id><BoundingBox><SouthLatitude>45.70768</SouthLatitude><WestLongitude>-122.6205</WestLongitude><NorthLatitude>45.70776</NorthLatitude><EastLongitude>-122.58377</EastLongitude></BoundingBox><DistanceUnit>Mile</DistanceUnit><DurationUnit>Second</DurationUnit><TravelDistance>3.900968</TravelDistance><TravelDuration>616</TravelDuration><TravelDurationTraffic>804</TravelDurationTraffic><TrafficDataUsed>Flow</TrafficDataUsed><TrafficCongestion>Medium</TrafficCongestion><RouteLeg><TravelDistance>3.900968</TravelDistance><TravelDuration>804</TravelDuration><Cost>0</Cost><ActualStart><Latitude>45.70776</Latitude><Longitude>-122.58377</Longitude></ActualStart><ActualEnd><Latitude>45.70768</Latitude><Longitude>-122.6205</Longitude></ActualEnd><RouteSubLeg><TravelDistance>0.989223</TravelDistance><TravelDuration>128</TravelDuration><StartWaypoint><Latitude>45.70776</Latitude><Longitude>-122.58377</Longitude><Description>NE 119th St</Description><IsVia>false</IsVia><LocationIdentifier>2|81|241|5|202|145|3|91|1|0|0|224|1|0|0|128|63|0|45.70776,-122.58377</LocationIdentifier><RoutePathIndex>0</RoutePathIndex></StartWaypoint><EndWaypoint><Latitude>45.707716</Latitude><Longitude>-122.604287</Longitude><Description>NE 119th St</Description><IsVia>true</IsVia><LocationIdentifier>2|81|241|5|202|240|4|91|1|0|0|224|1|232|103|165|62|0|45.707716,-122.604287</LocationIdentifier><RoutePathIndex>1</RoutePathIndex></EndWaypoint></RouteSubLeg><RouteSubLeg><TravelDistance>0.776714</TravelDistance><TravelDuration>249</TravelDuration><StartWaypoint><Latitude>45.707716</Latitude><Longitude>-122.604287</Longitude><Description>NE 119th St</Description><IsVia>true</IsVia><LocationIdentifier>2|81|241|5|202|240|4|91|1|0|0|224|1|232|103|165|62|0|45.707716,-122.604287</LocationIdentifier><RoutePathIndex>1</RoutePathIndex></StartWaypoint><EndWaypoint><Latitude>45.707747</Latitude><Longitude>-122.591333</Longitude><Description>NE 119th St</Description><IsVia>true</IsVia><LocationIdentifier>2|81|241|5|202|209|3|91|1|0|0|224|1|2|8|61|63|0|45.707747,-122.591333</LocationIdentifier><RoutePathIndex>2</RoutePathIndex></EndWaypoint></RouteSubLeg><RouteSubLeg><TravelDistance>1.88524</TravelDistance><TravelDuration>386</TravelDuration><StartWaypoint><Latitude>45.707747</Latitude><Longitude>-122.591333</Longitude><Description>NE 119th St</Description><IsVia>true</IsVia><LocationIdentifier>2|81|241|5|202|209|3|91|1|0|0|224|1|2|8|61|63|0|45.707747,-122.591333</LocationIdentifier><RoutePathIndex>2</RoutePathIndex></StartWaypoint><EndWaypoint><Latitude>45.70769</Latitude><Longitude>-122.615323</Longitude><Description>NE 119th St</Description><IsVia>true</IsVia><LocationIdentifier>2|81|241|5|202|144|130|90|1|0|0|224|1|89|242|35|63|0|45.70769,-122.615323</LocationIdentifier><RoutePathIndex>3</RoutePathIndex></EndWaypoint></RouteSubLeg><RouteSubLeg><TravelDistance>0.249791</TravelDistance><TravelDuration>41</TravelDuration><StartWaypoint><Latitude>45.70769</Latitude><Longitude>-122.615323</Longitude><Description>NE 119th St</Description><IsVia>true</IsVia><LocationIdentifier>2|81|241|5|202|144|130|90|1|0|0|224|1|89|242|35|63|0|45.70769,-122.615323</LocationIdentifier><RoutePathIndex>3</RoutePathIndex></StartWaypoint><EndWaypoint><Latitude>45.70768</Latitude><Longitude>-122.6205</Longitude><Description>NE 119th St</Description><IsVia>false</IsVia><LocationIdentifier>2|81|241|5|202|209|130|90|1|0|0|224|1|0|0|0|0|0|45.70768,-122.6205</LocationIdentifier><RoutePathIndex>5</RoutePathIndex></EndWaypoint></RouteSubLeg><StartTime>0001-01-01T00:00:00</StartTime><EndTime>0001-01-01T00:00:00</EndTime><Description>NE 119th St</Description><RouteRegion>NAv2</RouteRegion></RouteLeg></Route></Resources></ResourceSet></ResourceSets></Response>";
+        toConvert = toConvert.Replace("©", " ");
+        //toConvert =  WebUtility.HtmlEncode(toConvert);
+
+        /*
+        file.WriteLine("After removing namespace" + toConvert);
+        file.Close();
+        */
+
+        // convert it to blob/byte data
+        byte[] blobData = System.Text.Encoding.GetEncoding(1252).GetBytes(toConvert);
+        //
+        // and update the field 
+        Row.DirectionsResponseXMLString.AddBlobData(blobData);
+
+    }
+    
+    private XmlDocument RemoveNS(XmlDocument doc)
+    {
+        var xmlText = doc.OuterXml;
+        var newxml = Regex.Replace(xmlText, @"xmlns[:xsi|:xsd]*="".*?""", "");
+        var newdoc = new XmlDocument();
+        newdoc.LoadXml(newxml);
+        return newdoc;
+    }
+
+    public static string CleanInvalidXmlChars(string text)
+    {
+        // From xml spec valid chars: 
+        // #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]     
+        // any Unicode character, excluding the surrogate blocks, FFFE, and FFFF. 
+        string re = @"[^\x09\xA9\x0A\x0D\x20-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]";
+        return Regex.Replace(text, re, "");
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Input0Buffer: ScriptBuffer
+
+{
+    public Input0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public String StartingAddress
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[0]);
+        }
+    }
+    public bool StartingAddress_IsNull
+    {
+        get
+        {
+            return IsNull(0);
+        }
+    }
+
+    public String EndingAddress
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[1]);
+        }
+    }
+    public bool EndingAddress_IsNull
+    {
+        get
+        {
+            return IsNull(1);
+        }
+    }
+
+    public String RouteWithWaypoints
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[2]);
+        }
+    }
+    public bool RouteWithWaypoints_IsNull
+    {
+        get
+        {
+            return IsNull(2);
+        }
+    }
+
+    public String RouteID
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[3]);
+        }
+    }
+    public bool RouteID_IsNull
+    {
+        get
+        {
+            return IsNull(3);
+        }
+    }
+
+    public String URL
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool URL_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String TransitMode
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool TransitMode_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public DateTime CreatedDate
+    {
+        set
+        {
+            this[6] = value;
+        }
+    }
+    public bool CreatedDate_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(6);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public BlobColumn DirectionsResponseXMLString
+    {
+        get
+        {
+            return (BlobColumn)Buffer[BufferColumnIndexes[7]];
+        }
+        set
+        {
+            this[7] = value;
+        }
+    }
+    public bool DirectionsResponseXMLString_IsNull
+    {
+        get
+        {
+            return IsNull(7);
+        }
+        set
+        {
+            if (value)
+            {
+                SetNull(7);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public bool NextRow()
+    {
+        return base.NextRow();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_2d7461202e664805b7795f017a6f1858.Properties.Settings.get_Default():SC_2d7461202e664805b7795f017a6f1858.Properties.Sett" +
+    "ings")]
+
+namespace SC_2d7461202e664805b7795f017a6f1858.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public override void ProcessInput(int InputID, string InputName, PipelineBuffer Buffer, OutputNameMap OutputMap)
+    {
+
+        if (InputName.Equals(@"Input 0", StringComparison.Ordinal))
+        {
+            Input0_ProcessInput(new Input0Buffer(Buffer, GetColumnIndexes(InputID), OutputMap));
+        }
+
+    }
+
+    public virtual void Input0_ProcessInput(Input0Buffer Buffer)
+    {
+        while (Buffer.NextRow())
+        {
+            Input0_ProcessInputRow(Buffer);
+        }
+    }
+
+    public virtual void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public DateTime CreatedDate
+    {
+        get
+        {
+            return (DateTime)(ParentComponent.ReadOnlyVariables["CreatedDate"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String DistanceAPIKeyPP
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["DistanceAPIKey_PP"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String ModeOfTransportPP
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["ModeOfTransport_PP"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>SC_2d7461202e664805b7795f017a6f1858</msb:CodeName>
+		<msb:DisplayName>SC_2d7461202e664805b7795f017a6f1858</msb:DisplayName>
+		<msb:ProjectId>{1568B68D-97BA-4587-8913-9E4015B87A79}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="SC_2d7461202e664805b7795f017a6f1858.csproj"/>
+		<msb:Folder Include="Service References\"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="BufferWrapper.cs"/>
+		<msb:File Include="main.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="ComponentWrapper.cs"/>
+		<msb:Breakpoint Include="b3671031a5844403a3bc2de99c910b7a">
+			<msb:FileName>main.cs</msb:FileName>
+			<msb:LineNumber>140</msb:LineNumber>
+			<msb:ColumnNumber>9</msb:ColumnNumber>
+			<msb:Enabled>True</msb:Enabled>
+			<msb:ConditionType>1</msb:ConditionType>
+			<msb:Condition></msb:Condition>
+			<msb:Language>C#</msb:Language>
+			<msb:HitCountType>1</msb:HitCountType>
+			<msb:HitCountTarget>1</msb:HitCountTarget>
+		</msb:Breakpoint>
+		<msb:Breakpoint Include="76883c73f6044f2fb8f3e33395ccb278">
+			<msb:FileName>main.cs</msb:FileName>
+			<msb:ColumnNumber>5</msb:ColumnNumber>
+			<msb:Enabled>True</msb:Enabled>
+			<msb:LineNumber>126</msb:LineNumber>
+			<msb:Condition></msb:Condition>
+			<msb:ConditionType>1</msb:ConditionType>
+			<msb:Language>C#</msb:Language>
+			<msb:HitCountType>1</msb:HitCountType>
+			<msb:HitCountTarget>1</msb:HitCountTarget>
+		</msb:Breakpoint>
+	</msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_2d7461202e664805b7795f017a6f1858.csproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B032EA52-16DB-4147-80BF-755DEE33E99C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_2d7461202e664805b7795f017a6f1858</RootNamespace>
+    <AssemblyName>SC_2d7461202e664805b7795f017a6f1858</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=12.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=12.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=12.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=12.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC120</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_2d7461202e664805b7795f017a6f1858.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_2d7461202e664805b7795f017a6f1858.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_2d7461202e664805b7795f017a6f1858.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_2d7461202e664805b7795f017a6f1858.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_2d7461202e664805b7795f017a6f1858.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_2d7461202e664805b7795f017a6f1858.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDADqUE1kAAAAAAAAAAOAAIiALATAAAB4AAAAIAAAAAAAAVj0A
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAAQ9AABPAAAAAEAAAEgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAXB0AAAAgAAAAHgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEgEAAAAQAAAAAYAAAAgAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAJgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAA4
+PQAAAAAAAEgAAAACAAUANCQAABgYAAABAAAAAAAAAEw8AAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKBAAAAoqHgIoEQAACioTMAQA6AAAAAEAABFzEgAACgoc
+jR4AAAElFnIBAABwoiUXA28MAAAGoiUYclkAAHCiJRkCewIAAARvIwAABqIlGnJlAABwoiUbAnsC
+AAAEbyQAAAaiKBMAAAoLBgdvFAAACgxzFQAACg1zFQAACiYJCG8WAAAKAgkoBAAABm8XAAAKAwJ7
+AgAABG8kAAAGbxIAAAYDAnsCAAAEbyIAAAZvFAAABgMHbxAAAAZvGAAACm8ZAAAKEwQRBCgFAAAG
+EwQRBHIqAQBwci4BAHBvGgAAChMEIOQEAAAoGwAAChEEbxwAAAoTBQNvFgAABhEFbx0AAAoqEzAD
+ACMAAAACAAARA28YAAAKcjIBAHByYgEAcCgeAAAKCnMVAAAKJQZvFgAACioAEzADABMAAAACAAAR
+cmQBAHAKAgZyYgEAcCgeAAAKKh4CKBwAAAYqKgIDBAUoHwAACipSAnsgAAAKAnshAAAKFpRvIgAA
+CioiAhYoIwAACipSAnsgAAAKAnshAAAKF5RvIgAACioiAhcoIwAACipSAnsgAAAKAnshAAAKGJRv
+IgAACioiAhgoIwAACipSAnsgAAAKAnshAAAKGZRvIgAACioiAhkoIwAACiomAhoDKCQAAAoqWgMs
+CAIaKCUAAAoqctwBAHBzJgAACnomAhsDKCQAAAoqWgMsCAIbKCUAAAoqctwBAHBzJgAACno6AhwD
+jBMAAAEoJAAACipaAywIAhwoJQAACipy3AEAcHMmAAAKemYCeyAAAAoCeyEAAAodlG8nAAAKdBQA
+AAEqJgIdAygkAAAKKiICHSgjAAAKKloDLAgCHSglAAAKKnLcAQBwcyYAAAp6HgIoKAAACioeAigp
+AAAKKn4CKCoAAAoCAnMgAAAGfQEAAAQCAnMhAAAGfQIAAAQqkgRyeQIAcBpvKwAACiwVAgUCAygs
+AAAKDgRzBwAABm8eAAAGKkorBwIDbx8AAAYDbxoAAAYt8SoGKjoCKC0AAAoCA30DAAAEKjoCKC0A
+AAoCA30EAAAEKpYCewQAAARvLgAACnKJAgBwby8AAAooMAAACm8xAAAKpRMAAAEqlgJ7BAAABG8u
+AAAKcqECAHBvLwAACigwAAAKbzEAAAp0HgAAASqWAnsEAAAEby4AAApyxQIAcG8vAAAKKDAAAApv
+MQAACnQeAAABKh4CKC0AAAoqrn4FAAAELR5y6wIAcNAHAAACKDIAAApvMwAACnM0AAAKgAUAAAR+
+BQAABCoafgYAAAQqHgKABgAABCoafgcAAAQqHgIoNQAACioucyoAAAaABwAABCoAAEJTSkIBAAEA
+AAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAAEgIAAAjfgAAtAgAAMQJAAAjU3RyaW5ncwAAAAB4
+EgAAYAMAACNVUwDYFQAAEAAAACNHVUlEAAAA6BUAADACAAAjQmxvYgAAAAAAAAACAAABVxWiAQkB
+AAAA+gEzABYAAAEAAAArAAAACAAAAAcAAAArAAAAFwAAADUAAAAQAAAAAgAAAAQAAAAWAAAAGQAA
+AAEAAAAGAAAAAQAAAAAAKwQBAAAAAAAGAL4C2QYGAFID2QYGAAoCxgYPAE0HAAAGADcC0AUGAKEC
+0AUGAIIC0AUGADkD0AUGAN4C0AUGAPcC0AUGAE4C0AUGAGkCmQMKABIDNwEOAI0IaggSALYISwUK
+AHAGNwEWAGEGNwEKABkGNwEGAC4BfQUWAJsFNwEKAOAINwEGAGMIfQUGAO0BxgYGAIEG+QYGAA0G
+uwUOAL0BFQQOAB4CFQQOAIUBpgUGANIB2QYGAA4EfQUSAJcISwUSAPgASwUGAJADQgkOALEJ3wcG
+AOIFfQUGAPwFfQUaABEAkQYaAAEAkQZXAGIJAAAaACIAkQYGAFgBfQUGAAABfQUGALsJ0AUAAAAA
+XgAAAAAAAQABAAEAEACQBQAAEAABAAEAAQAQAFQGAABBAAEABwABABAAwggAAFUAAQAcAAEAEAD+
+BwAAWQADACAAAQAQAJcHAABZAAQAIQAAABAAAAdcB1kABQAlAAABEADPB1wHcQAHACkABgD+B9sA
+BgCXB98AAQDQCOMAAQDQCOMAEQCEBecAEQB1AesAEQDYAO8AUCAAAAAAxgBwAwYAAQBYIAAAAADG
+AHsDBgABAGAgAAAAAMYAkgnzAAEAVCEAAAAAgQCuAPkAAgCEIQAAAACWAAoIAAEDAKMhAAAAAIYY
+uQYGAAQAqyEAAAAAhhi5Bl8ABAC2IQAAAACGCDEINwAHAMshAAAAAIYICgWGAAcA1CEAAAAAhggf
+CDcABwDpIQAAAACGCPEEhgAHAPIhAAAAAIYIRQg3AAcAByIAAAAAhgglBYYABwAQIgAAAACGCGcA
+NwAHACUiAAAAAIYIUwSGAAcALiIAAAAAhgh7ABAABwA4IgAAAACGCGYEBQEIAE8iAAAAAIYI6AAQ
+AAkAWSIAAAAAhgh1BAUBCgBwIgAAAACGCK0BCgELAH8iAAAAAIYIjAQFAQwAliIAAAAAhgizAxAB
+DQCwIgAAAACGCNMDFQENALoiAAAAAIYIowSGAA4AwyIAAAAAhgjKBAUBDgDaIgAAAACGAKkJhgAP
+AOIiAAAAAIYAdQiGAA8A6iIAAAAAhhi5BgYADwAKIwAAAADGADUJGwEPAC8jAAAAAMYBLgnzABMA
+QiMAAAAAxgGSCfMAFABEIwAAAACGGLkGJQEVAFMjAAAAAIYYuQYlARYAYiMAAAAAhgidASsBFwCI
+IwAAAACGCJkANwAXAK4jAAAAAIYIgwA3ABcA1CMAAAAAgxi5BgYAFwDcIwAAAACTCH0GMAEXAAgk
+AAAAAJMIXQE1ARcADyQAAAAAkwhpAToBFwAXJAAAAACWCIEIQAEYAB4kAAAAAIYYuQYGABgAJiQA
+AAAAkRi/BkUBGAAAAAEArQkAAAEAzAAAAAEAjQkAAAEAdgYAAAIAqgcAAAMAJwYAAAEAhwMAAAEA
+hwMAAAEAhwMAAAEAhwMAAAEAhwMAAAEAhwMAAAEAhwMAAAEAhwMAAAEAcwAAAAIAJAEAAAMAdgYA
+AAQAJwYAAAEAdgYAAAEArQkAAAEA5ggAAAEA5ggAAAEAhwMJALkGAQARALkGBgAZALkGCgApALkG
+EAAxALkGEAA5ALkGEABBALkGEABJALkGEABRALkGEABZALkGEABhALkGEABpALkGBgC5ALkGBgDZ
+ALkGFQDpALkGBgCpAHADBgCpAHsDBgBxALkGBgDxAFwIJwBxAPMDLQB5ALkGBgB5AFYFEAB5AKII
+MgABAV4FNwCxAAIENwDxANAAOwAJAY0DQQAJAaEHSAChALcATgARAdAAWACBALkGXwCBAHYGaQCB
+AKoHbQCJAAsEcQCBADwFdgCBAHQFewCBAEMFAQAZAbkGEACJAGsFgQCBAKkJhgCBAHUIhgCpALkG
+BgDxANgHigCpAL4HkgCxALkGBgCpAIsHmAApAWsFngCpAH0JpQAxAU4JqwBJARIBsgBJAbcJuwDB
+ALkGwQDhALkGBgAuAAsAagEuABMAcwEuABsAkgEuACMAmwEuACsAxAEuADMAxAEuADsAxAEuAEMA
+mwEuAEsAygEuAFMAxAEuAFsA4QFDAGMAKwLhAHsAKwLjAGsAKwKJAnMAkgGpAnMAkgEbAFQAAwAB
+AAYAEQAHABQACAAWAAAANQhJAQAADgVNAQAAIwhJAQAA9QRNAQAASQhJAQAAKQVNAQAAawBJAQAA
+VwRNAQAAfwBJAQAAagRNAQAA7ABJAQAAeQRNAQAAsQFRAQAAkARNAQAA1wNWAQAAzgRNAQAAsQFR
+AQAAnQBJAQAAhwBJAQAAgQZbAQAAfQFgAQAAhQhlAQIACAADAAIACQAFAAIACgAHAAIACwAJAAIA
+DAALAAIADQANAAIADgAPAAIADwARAAEAEAATAAEAEQAVAAEAEgAXAAEAEwAZAAEAFAAbAAEAFQAd
+AAIAFgAfAAEAFwAfAAIAGAAhAAEAGQAhAAIAIgAjAAIAIwAlAAIAJAAnAAIAJgApAAIAJwArAAEA
+KAArAAIAKQAtAASAAAABAAAAAAAAAAAAAAAAADoAAAAEAAAAAAAAAAAAAADJAMMAAAAAAAwAAAAA
+AAAAAAAAANIA8AgAAAAABAAAAAAAAAAAAAAAyQB9BQAAAAAEAAAAAAAAAAAAAADJAEsFAAAAAAwA
+AAAAAAAAAAAAANIADQkAAAAADAAAAAAAAAAAAAAA0gAxBgAAAAAAAAAAAQAAAAoHAAAAAAAAAElE
+VFNWYXJpYWJsZTEwMABJRFRTVmFyaWFibGVzMTAwAElEVFNFdmFsdWF0b3JDb250ZXh0MTAwAFND
+XzJkNzQ2MTIwMmU2NjQ4MDViNzc5NWYwMTdhNmYxODU4ADxNb2R1bGU+AGdldF9Sb3V0ZUlEAElu
+cHV0SUQAc2V0X1VSTABnZXRfTW9kZU9mVHJhbnNwb3J0UFAAZ2V0X0Rpc3RhbmNlQVBJS2V5UFAA
+UmVtb3ZlTlMAQWRkQmxvYkRhdGEAbXNjb3JsaWIAZG9jAFJlcGxhY2UAZGVmYXVsdEluc3RhbmNl
+AHNldF9UcmFuc2l0TW9kZQBYbWxOb2RlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFu
+ZGxlAElucHV0TmFtZQBEYXRlVGltZQBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5QaXBlbGluZQBU
+eXBlAGdldF9DdWx0dXJlAHNldF9DdWx0dXJlAHJlc291cmNlQ3VsdHVyZQBBcHBsaWNhdGlvblNl
+dHRpbmdzQmFzZQBnZXRfQ3JlYXRlZERhdGUAc2V0X0NyZWF0ZWREYXRlAEVkaXRvckJyb3dzYWJs
+ZVN0YXRlAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAERlYnVnZ2VyTm9uVXNlckNvZGVBdHRy
+aWJ1dGUARGVidWdnYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVBdHRyaWJ1dGUAQXNzZW1i
+bHlUaXRsZUF0dHJpYnV0ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBUYXJnZXRGcmFtZXdv
+cmtBdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRlAEFzc2VtYmx5RGVzY3Jp
+cHRpb25BdHRyaWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBBc3NlbWJseVBy
+b2R1Y3RBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAU1NJU1NjcmlwdENvbXBv
+bmVudEVudHJ5UG9pbnRBdHRyaWJ1dGUAQXNzZW1ibHlDb21wYW55QXR0cmlidXRlAFJ1bnRpbWVD
+b21wYXRpYmlsaXR5QXR0cmlidXRlAFByZUV4ZWN1dGUAUG9zdEV4ZWN1dGUAdmFsdWUAR2V0RW5j
+b2RpbmcAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBnZXRfRGlyZWN0aW9uc1Jlc3BvbnNlWE1M
+U3RyaW5nAHNldF9EaXJlY3Rpb25zUmVzcG9uc2VYTUxTdHJpbmcARG93bmxvYWRTdHJpbmcAVG9T
+dHJpbmcAR2V0U3RyaW5nAFN5c3RlbS5Db21wb25lbnRNb2RlbABTQ18yZDc0NjEyMDJlNjY0ODA1
+Yjc3OTVmMDE3YTZmMTg1OC5kbGwAZ2V0X1JvdXRlSURfSXNOdWxsAHNldF9VUkxfSXNOdWxsAHNl
+dF9UcmFuc2l0TW9kZV9Jc051bGwAc2V0X0NyZWF0ZWREYXRlX0lzTnVsbABnZXRfRGlyZWN0aW9u
+c1Jlc3BvbnNlWE1MU3RyaW5nX0lzTnVsbABzZXRfRGlyZWN0aW9uc1Jlc3BvbnNlWE1MU3RyaW5n
+X0lzTnVsbABnZXRfRW5kaW5nQWRkcmVzc19Jc051bGwAZ2V0X1N0YXJ0aW5nQWRkcmVzc19Jc051
+bGwAZ2V0X1JvdXRlV2l0aFdheXBvaW50c19Jc051bGwAU2V0TnVsbABTeXN0ZW0uWG1sAExvYWRY
+bWwAZ2V0X091dGVyWG1sAGdldF9JdGVtAHNldF9JdGVtAFN5c3RlbQByZXNvdXJjZU1hbgBTY3Jp
+cHRNYWluAEJsb2JDb2x1bW4AU3lzdGVtLkNvbmZpZ3VyYXRpb24AU3lzdGVtLkdsb2JhbGl6YXRp
+b24AU3lzdGVtLlJlZmxlY3Rpb24ASW52YWxpZE9wZXJhdGlvbkV4Y2VwdGlvbgBTdHJpbmdDb21w
+YXJpc29uAEN1bHR1cmVJbmZvAE91dHB1dE5hbWVNYXAAT3V0cHV0TWFwAE1pY3Jvc29mdC5TcWxT
+ZXJ2ZXIuRFRTUnVudGltZVdyYXAASW5wdXQwQnVmZmVyAFBpcGVsaW5lQnVmZmVyAFNjcmlwdEJ1
+ZmZlcgBnZXRfUmVzb3VyY2VNYW5hZ2VyAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlJ1bnRpbWUu
+V3JhcHBlcgAuY3RvcgAuY2N0b3IAU3lzdGVtLkRpYWdub3N0aWNzAFN5c3RlbS5SdW50aW1lLkNv
+bXBpbGVyU2VydmljZXMAU3lzdGVtLlJlc291cmNlcwBTQ18yZDc0NjEyMDJlNjY0ODA1Yjc3OTVm
+MDE3YTZmMTg1OC5Qcm9wZXJ0aWVzLlJlc291cmNlcy5yZXNvdXJjZXMARGVidWdnaW5nTW9kZXMA
+U0NfMmQ3NDYxMjAyZTY2NDgwNWI3Nzk1ZjAxN2E2ZjE4NTguUHJvcGVydGllcwBnZXRfUmVhZE9u
+bHlWYXJpYWJsZXMAR2V0Qnl0ZXMAQnVmZmVyQ29sdW1uSW5kZXhlcwBHZXRDb2x1bW5JbmRleGVz
+AFNldHRpbmdzAEVxdWFscwBTeXN0ZW0uVGV4dC5SZWd1bGFyRXhwcmVzc2lvbnMAQ29ubmVjdGlv
+bnMAQ2xlYW5JbnZhbGlkWG1sQ2hhcnMAZ2V0X0VuZGluZ0FkZHJlc3MAZ2V0X1N0YXJ0aW5nQWRk
+cmVzcwBnZXRfUm91dGVXaXRoV2F5cG9pbnRzAENvbmNhdABPYmplY3QAU3lzdGVtLk5ldABFbmRP
+ZlJvd3NldABnZXRfRGVmYXVsdABXZWJDbGllbnQAWG1sRWxlbWVudABnZXRfRG9jdW1lbnRFbGVt
+ZW50AFhtbERvY3VtZW50AFVzZXJDb21wb25lbnQAUGFyZW50Q29tcG9uZW50AFNjcmlwdENvbXBv
+bmVudABNaWNyb3NvZnQuU3FsU2VydmVyLlR4U2NyaXB0AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuUGlw
+ZWxpbmVIb3N0AElucHV0MF9Qcm9jZXNzSW5wdXQAU3lzdGVtLlRleHQAR2V0VmFsdWVXaXRoQ29u
+dGV4dABTY3JpcHRDb21wb25lbnRFdmFsQ29udGV4dABnZXRfRXZhbHVhdG9yQ29udGV4dABJbnB1
+dDBfUHJvY2Vzc0lucHV0Um93AE5leHRSb3cAUmVnZXgAZ2V0X0Fzc2VtYmx5AABXaAB0AHQAcAA6
+AC8ALwBkAGUAdgAuAHYAaQByAHQAdQBhAGwAZQBhAHIAdABoAC4AbgBlAHQALwBSAEUAUwBUAC8A
+dgAxAC8AUgBvAHUAdABlAHMAPwAACyYAawBlAHkAPQAAgMMmAGQAaQBzAHQAYQBuAGMAZQBVAG4A
+aQB0AD0AbQBpACYAbwBwAHQAaQBtAGkAegBlAD0AdABpAG0AZQBXAGkAdABoAFQAcgBhAGYAZgBp
+AGMAJgByAG8AdQB0AGUAQQB0AHQAcgBpAGIAdQB0AGUAcwA9AGUAeABjAGwAdQBkAGUASQB0AGkA
+bgBlAHIAYQByAHkAJgBvAHUAdABwAHUAdAA9AHgAbQBsACYAdAByAGEAdgBlAGwAbQBvAGQAZQA9
+AAADqQABAyAAAC94AG0AbABuAHMAWwA6AHgAcwBpAHwAOgB4AHMAZABdACoAPQAiAC4AKgA/ACIA
+AAEAd1sAXgBcAHgAMAA5AFwAeABBADkAXAB4ADAAQQBcAHgAMABEAFwAeAAyADAALQBcAHUARAA3
+AEYARgBcAHUARQAwADAAMAAtAFwAdQBGAEYARgBEAFwAdQAxADAAMAAwADAALQBcAHUAMQAwAEYA
+RgBGAEYAXQABgJtJAHMATgB1AGwAbAAgAHAAcgBvAHAAZQByAHQAeQAgAGMAYQBuAG4AbwB0ACAA
+YgBlACAAcwBlAHQAIAB0AG8AIABGAGEAbABzAGUALgAgAEEAcwBzAGkAZwBuACAAYQAgAHYAYQBs
+AHUAZQAgAHQAbwAgAHQAaABlACAAYwBvAGwAdQBtAG4AIABpAG4AcwB0AGUAYQBkAC4AAA9JAG4A
+cAB1AHQAIAAwAAAXQwByAGUAYQB0AGUAZABEAGEAdABlAAAjRABpAHMAdABhAG4AYwBlAEEAUABJ
+AEsAZQB5AF8AUABQAAAlTQBvAGQAZQBPAGYAVAByAGEAbgBzAHAAbwByAHQAXwBQAFAAAHFTAEMA
+XwAyAGQANwA0ADYAMQAyADAAMgBlADYANgA0ADgAMAA1AGIANwA3ADkANQBmADAAMQA3AGEANgBm
+ADEAOAA1ADgALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMAAAAAAJ8M
+36RMcKFCgCpm9n8vyX0ABCABAQgDIAABBSABARERBCABAQ4FIAEBEWkLBwYSOQ4OEj0OHQUFAAEO
+HQ4EIAEODgQgABJ9AyAADgUgAg4ODgYAARKAhQgFIAEdBQ4FIAEBHQUDBwEOBgADDg4ODgkgAwES
+RR0IEkkDBhJFAwYdCAQgAQ4IBCABAggFIAIBCBwEIAEcCAMgAAIHIAICDhGAkQUgAR0ICAUgABKA
+lQYgARKAmRwFAAASgJ0GIAEcEoChCAABEoClEYCpBSAAEoCtByACAQ4SgK0It3pcVhk04IkIiYRd
+zYCAzJEDBhIUAwYSGAMGElUDBhJhAwYSZQMGEiAFIAEBEgwGIAESPRI9BAABDg4EIAEBAgUgAQER
+TQQgABJRBSABARJRCSAEAQgOEkUSSQUgAQESVQQgABFNBAAAEmEEAAASZQUAAQESZQQAABIgAwAA
+AQMoAA4DKAACBCgAEU0EKAASUQQIABJhBAgAEmUECAASIAgBAAgAAAAAAB4BAAEAVAIWV3JhcE5v
+bkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAjU0NfMmQ3NDYxMjAyZTY2NDgwNWI3Nzk1ZjAx
+N2E2ZjE4NTgAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAgMjAxNgAASQEAGi5ORVRGcmFtZXdvcmss
+VmVyc2lvbj12NC41AQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFtZRIuTkVUIEZyYW1ld29yayA0LjUE
+AQAAALQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRlciwgbXNj
+b3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1i
+NzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0AgAAAAAA
+AAAAAAAAUEFEUEFEULQAAAAsPQAAAAAAAAAAAABGPQAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+OD0AAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA/yUAIAAQAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA
+EAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABY
+QAAA7AMAAAAAAAAAAAAA7AM0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E
+7/4AAAEAAAABAAAAAAAAAAEAAAAAAD8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBW
+AGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAA
+AACwBEwDAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAACgDAAABADAAMAAwADAAMAA0
+AGIAMAAAABoAAQABAEMAbwBtAG0AZQBuAHQAcwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEAbgB5AE4A
+YQBtAGUAAAAAAAAAAABwACQAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBD
+AF8AMgBkADcANAA2ADEAMgAwADIAZQA2ADYANAA4ADAANQBiADcANwA5ADUAZgAwADEANwBhADYA
+ZgAxADgANQA4AAAAMAAIAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAuADAALgAw
+AAAAcAAoAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABTAEMAXwAyAGQANwA0ADYAMQAyADAA
+MgBlADYANgA0ADgAMAA1AGIANwA3ADkANQBmADAAMQA3AGEANgBmADEAOAA1ADgALgBkAGwAbAAA
+AEgAEgABAEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAA
+QAAgACAAMgAwADEANgAAACoAAQABAEwAZQBnAGEAbABUAHIAYQBkAGUAbQBhAHIAawBzAAAAAAAA
+AAAAeAAoAAEATwByAGkAZwBpAG4AYQBsAEYAaQBsAGUAbgBhAG0AZQAAAFMAQwBfADIAZAA3ADQA
+NgAxADIAMAAyAGUANgA2ADQAOAAwADUAYgA3ADcAOQA1AGYAMAAxADcAYQA2AGYAMQA4ADUAOAAu
+AGQAbABsAAAAaAAkAAEAUAByAG8AZAB1AGMAdABOAGEAbQBlAAAAAABTAEMAXwAyAGQANwA0ADYA
+MQAyADAAMgBlADYANgA0ADgAMAA1AGIANwA3ADkANQBmADAAMQA3AGEANgBmADEAOAA1ADgAAAA0
+AAgAAQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAAOAAIAAEA
+QQBzAHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAAFg9AAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_2d7461202e664805b7795f017a6f1858</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">User::CreatedDate,$Project::ModeOfTransport_PP,$Project::DistanceAPIKey_PP</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String">&lt;SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"&gt;
+&lt;SOAP-ENV:Body&gt;
+&lt;a1:ScriptBreakpointInfo id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Microsoft.SqlServer.VSTAHosting/Microsoft.SqlServer.VSTAScriptingLib%2C%20Version%3D12.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3D89845dcd8080cc91"&gt;
+&lt;Enabled&gt;true&lt;/Enabled&gt;
+&lt;File id="ref-3"&gt;main.cs&lt;/File&gt;
+&lt;FileLine&gt;140&lt;/FileLine&gt;
+&lt;FileColumn&gt;9&lt;/FileColumn&gt;
+&lt;/a1:ScriptBreakpointInfo&gt;
+&lt;/SOAP-ENV:Body&gt;
+&lt;/SOAP-ENV:Envelope&gt;
+</arrayElement>
+                    <arrayElement
+                      dataType="System.String">&lt;SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"&gt;
+&lt;SOAP-ENV:Body&gt;
+&lt;a1:ScriptBreakpointInfo id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/Microsoft.SqlServer.VSTAHosting/Microsoft.SqlServer.VSTAScriptingLib%2C%20Version%3D12.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3D89845dcd8080cc91"&gt;
+&lt;Enabled&gt;true&lt;/Enabled&gt;
+&lt;File id="ref-3"&gt;main.cs&lt;/File&gt;
+&lt;FileLine&gt;126&lt;/FileLine&gt;
+&lt;FileColumn&gt;5&lt;/FileColumn&gt;
+&lt;/a1:ScriptBreakpointInfo&gt;
+&lt;/SOAP-ENV:Body&gt;
+&lt;/SOAP-ENV:Envelope&gt;
+</arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum"
+                  typeConverter="NOTBROWSABLE">8aec815af821764e803c6f3f54d7d294</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataShaChecksum"
+                  typeConverter="NOTBROWSABLE">4bf999bbf39ab21a1d713dae053cac19863d10e3</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Read BING API.Inputs[Input 0]"
+                  hasSideEffects="true"
+                  name="Input 0">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Read BING API.Inputs[Input 0].Columns[Starting Address]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Starting Address"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[Starting Address]"
+                      name="Starting Address" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Read BING API.Inputs[Input 0].Columns[Ending Address]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Ending Address"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[Ending Address]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Read BING API.Inputs[Input 0].Columns[RouteWithWaypoints]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1500"
+                      cachedName="RouteWithWaypoints"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[RouteWithWaypoints]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Read BING API.Inputs[Input 0].Columns[RouteID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="RouteID"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[RouteID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Read BING API.Outputs[Output 0]"
+                  name="Output 0"
+                  synchronousInputId="Package\Data Flow Task\Read BING API.Inputs[Input 0]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[URL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6000"
+                      lineageId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[URL]"
+                      name="URL" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[TransitMode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[TransitMode]"
+                      name="TransitMode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[CreatedDate]"
+                      name="CreatedDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[DirectionsResponseXMLString]"
+                      dataType="nText"
+                      lineageId="Package\Data Flow Task\Read BING API.Outputs[Output 0].Columns[DirectionsResponseXMLString]"
+                      name="DirectionsResponseXMLString" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Read Source and Destination address from Excel"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Read Source and Destination address from Excel"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Read Source and Destination address from Excel.Connections[FlatFileConnection]"
+                  connectionManagerID="{6ECEC825-E072-4A17-8550-1401369F1AE5}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Fetch Address from CSV File]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[Starting Address]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].ExternalColumns[Starting Address]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[Starting Address]"
+                      name="Starting Address"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[Ending Address]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].ExternalColumns[Ending Address]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[Ending Address]"
+                      name="Ending Address"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[RouteWithWaypoints]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].ExternalColumns[RouteWithWaypoints]"
+                      length="1500"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[RouteWithWaypoints]"
+                      name="RouteWithWaypoints"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[RouteID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].ExternalColumns[RouteID]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].Columns[RouteID]"
+                      name="RouteID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].ExternalColumns[Starting Address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Starting Address" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].ExternalColumns[Ending Address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Ending Address" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].ExternalColumns[RouteWithWaypoints]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1500"
+                      name="RouteWithWaypoints" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output].ExternalColumns[RouteID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RouteID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Flat File Source Output]"
+              endId="Package\Data Flow Task\Read BING API.Inputs[Input 0]"
+              name="Flat File Source Output"
+              startId="Package\Data Flow Task\Read Source and Destination address from Excel.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Output 0]"
+              endId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Output 0"
+              startId="Package\Data Flow Task\Read BING API.Outputs[Output 0]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Flow Task"
+          TopLeft="153.142859750864,153.552943329993" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Data Flow Task\Read BING API"
+          TopLeft="110.158732034724,150.964707606887" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Data Flow Task\OLE DB Command"
+          TopLeft="120.571430624748,242.870591641462" />
+        <NodeLayout
+          Size="319,42"
+          Id="Package\Data Flow Task\Read Source and Destination address from Excel"
+          TopLeft="110.857144745029,78.3058834511516" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Output 0]"
+          TopLeft="188.158732034724,192.964707606887">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18.912698590024,49.905884034575"
+              Start="0,0"
+              End="18.912698590024,42.405884034575">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.9529420172875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.9529420172875"
+                    Point2="0,24.9529420172875"
+                    Point3="4,24.9529420172875" />
+                  <mssgle:LineSegment
+                    End="14.912698590024,24.9529420172875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14.912698590024,24.9529420172875"
+                    Point2="18.912698590024,24.9529420172875"
+                    Point3="18.912698590024,28.9529420172875" />
+                  <mssgle:LineSegment
+                    End="18.912698590024,42.405884034575" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Flat File Source Output]"
+          TopLeft="270.357144745029,120.305883451152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-82.198412710305,30.6588241557354"
+              Start="0,0"
+              End="-82.198412710305,23.1588241557354">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.3294120778677" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.3294120778677"
+                    Point2="0,15.3294120778677"
+                    Point3="-4,15.3294120778677" />
+                  <mssgle:LineSegment
+                    End="-78.198412710305,15.3294120778677" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-78.198412710305,15.3294120778677"
+                    Point2="-82.198412710305,15.3294120778677"
+                    Point3="-82.198412710305,19.3294120778677" />
+                  <mssgle:LineSegment
+                    End="-82.198412710305,23.1588241557354" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
